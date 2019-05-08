@@ -1,0 +1,22 @@
+{
+    "name": "kuno1/hagakure",
+    "description": "Yet Another Error Reporter",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "fumikito",
+            "email": "fumikito@kunoichiwp.com"
+        }
+    ],
+    "scripts": {
+        "test": "phpunit"
+    },
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-0": {
+            "Kunoichi\\Hagakure": "src"
+        }
+    }
+}

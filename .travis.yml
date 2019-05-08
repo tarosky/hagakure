@@ -1,0 +1,38 @@
+sudo: false
+language: php
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+branches:
+  only:
+  - master
+  - "/^v?[0-9\\.]+/"
+cache:
+- composer
+- "$HOME/.composer/cache"
+php:
+- 7.0
+env:
+- WP_VERSION=latest WP_MULTISITE=0
+- WP_VERSION=nightly WP_MULTISITE=0
+before_script:
+- export PATH="$HOME/.composer/vendor/bin:$PATH"
+- bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+- composer global require "phpunit/phpunit=4.8.*|5.7.*"
+- composer install
+script:
+- phpunit
+after_success:
+- curl -L https://raw.githubusercontent.com/fumikito/wp-readme/master/wp-readme.php | php
+- sed -i -e "s/nightly/${TRAVIS_TAG}/" $(basename $TRAVIS_REPO_SLUG).php
+- curl https://raw.githubusercontent.com/miya0001/auto-build/master/auto-build.sh | bash
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: Pu8Z9MqvfNyCUBJNP2ToE2TQ/0EXjB7W9EIMit4CAOAd/QvgmckMlMzbFc9Rz2rcFsiQwAAeqr6j1h1JannolIRXVPyee1dC9jjDghcWf5JA3Pstqrl+jfQctrUXwxCAMyMNcZ+wAuCgT0iX9qkBfchIyJHc5GHJpQqZqF4lmbDscfZ4v1yVPZ4df21sayL2kyTuDV8uJu6VTMBOI8ML7t2xY7izRfQB9Xc8bqoR/0zRYqXKmwUlGt2w5UJvUv8m0NfNhTNhE3Gcbg6PqyQbCRw0q481WcdFA1081WwrXmIWqef59F0Y3DMgJoyDdu3+Gw42ZZqHkPqBAPBvRnSf/2Yu+IspfTFF+uU+uvZ3+RQIVcVinbHzN7MnQnmokI13DefUVnvwShqn56958pES54TPasLYNfWExi/YTvunzmm9wskPRwOBUJ2bvLURyvESlxsQJMQ9gw7aLtpZDsN28XP2eo70fJ96+2bhlDA2phYY0k9NPwuUXBsDiixuhU4+PhghoGMNIZumAgkR+EPJtyMe8iR7Gp6QlXYoPxTzWBKPBv5QdIpfZDWdtFr2vIbxh6VNT0djCCifVXA597IdIUVzDJao+urIlh1iWjzkxX5Wc1AEFUXrPQprf7MCHCK+emPFgCL6RK9tRDMQ0hnmWzx9EczYVElCmue93LNQZCQ=
+  file: hagakure.zip
+  on:
+    tags: true
+    repo: kuno1/hagakure
