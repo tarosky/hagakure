@@ -1,2 +1,72 @@
-# hagakure
-Find fatal error and get backtrace.
+# Hagakure - Yet Another Error Reporter
+
+<!-- only:wp>
+Contributors: kuno1, Takahashi_Fumiki  
+Tags: search, elasticsearch  
+Requires at least: 5.0  
+Requires PHP: 7.0  
+Tested up to: 5.1.1  
+Stable tag: 0.7.0  
+License: GPLv3 or later  
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
+<only:wp -->
+
+A WordPress plugin to clarify meaningless errors like "Allowed memory size of xxxxxxxx bytes exhausted".
+
+<!-- only:github/ -->
+![Travis CI](https://travis-ci.org/kuno1/hagakure.svg?branch=master)
+<!-- /only:github -->
+
+## Description
+
+Have you ever seen an error log like below?
+
+> PHP Fatal error: Allowed memory size of xxxxxx bytes exhausted (tried to allocate xxx bytes) in /var/www/wordpress/wp-includes/wp-db.php on line 2007
+
+This means that [PHP memory limit](https://www.php.net/manual/en/ini.core.php#ini.memory-limit) is exhausted while retrieving data from database. In many case, this happens when your site has big data and making insane loops inside.
+
+But we want to know that **which plugin tried to retrieve data?**
+
+Hagakure adds extra information to error.log file when `wp-db.php` causes memory limit error:
+
+```
+[08-May-2019 10:28:37 UTC] wpdb Error Backtrace:
+#1      Kunoichi\Hagakure\DbLogger->filter_query()      /app/public/wp-includes/class-wp-hook.php       Line 286
+#2      WP_Hook->apply_filters()        /app/public/wp-includes/plugin.php      Line 208
+#3      apply_filters   /app/public/wp-includes/wp-db.php       Line 1871
+#4      wpdb->query()   /app/public/wp-includes/wp-db.php       Line 2579
+#5      wpdb->get_results()     /app/public/wp-includes/class-wp-query.php      Line 2979
+#6      WP_Query->get_posts()   /app/public/wp-includes/class-wp-query.php      Line 3387
+#7      WP_Query->query()       /app/public/wp-includes/post.php        Line 1961
+#8      get_posts       /app/public/wp-content/plugins/hagakure/hagakure.php    Line 34
+#9      {closure}       /app/public/wp-includes/class-wp-hook.php       Line 286
+#10     WP_Hook->apply_filters()        /app/public/wp-includes/class-wp-hook.php       Line 310
+#11     WP_Hook->do_action()    /app/public/wp-includes/plugin.php      Line 465
+#12     do_action       /app/public/wp-includes/template-loader.php     Line 13
+#13     require_once    /app/public/wp-blog-header.php  Line 19
+#14     require /app/public/index.php   Line 17
+```
+
+This log will always follow memoly limit Fatal Error by `wp-db.php`. Now you can find `#8` calls `get_posts` repeatedly.
+
+We recommend to watch logs with notification services like [CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html).
+This error occurs on the productional environment and you may not have chanses to see it occurs.
+We use Hagakure with our [hosting service](https://hosting.kunoichiwp.com/), please looking forward to see [our blog published](https://kunoichiwp.com/blog) and describing about the integration!
+
+## Installation
+
+1. Upload `hagakure` folder to the `/wp-content/plugins` directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. That's it. This plugin will work as background.
+
+## Screenshots
+
+W.I.P
+
+## Changelog
+
+### 0.7.0
+
+* first Release.
+
+
