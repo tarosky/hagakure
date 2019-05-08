@@ -6,7 +6,7 @@ Tags: search, elasticsearch
 Requires at least: 5.0  
 Requires PHP: 7.0  
 Tested up to: 5.1.1  
-Stable tag: 0.7.0  
+Stable tag: 0.7.1  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 <only:wp -->
@@ -58,6 +58,12 @@ We use Hagakure with our [hosting service](https://hosting.kunoichiwp.com/), ple
 1. Upload `hagakure` folder to the `/wp-content/plugins` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. That's it. This plugin will work as background.
+
+## Frequently Asked Questions
+
+### How can I contribute?
+
+We host this plugin on GitHub. Please feel free to send [PRs](https://github.com/kuno1/hagakure/pulls) or to make [issues](https://github.com/kuno1/hagakure/issues).
 
 ## Screenshots
 
