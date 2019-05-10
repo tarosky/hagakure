@@ -14,6 +14,9 @@
     },
     "minimum-stability": "stable",
     "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^6"
+    },
     "autoload": {
         "psr-0": {
             "Kunoichi\\Hagakure": "src"
