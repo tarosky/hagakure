@@ -13,9 +13,18 @@ cache:
 - "$HOME/.composer/cache"
 php:
 - 7.0
+- 7.2
 env:
-- WP_VERSION=latest WP_MULTISITE=0
-- WP_VERSION=nightly WP_MULTISITE=0
+  global:
+    - SVN_REPO: https://plugins.svn.wordpress.org/hagakure
+    - secure: "YAVp1gH/tsLkEso55jVpPufuizqbFV9zoAO/R2Q8PhTnIyPrE3c1Kbdgtqe/tq94G58OySzFXpcG6vf8+I/E7Brf/32GaD+VjgmbUJr57sb+fW0bdCKEIV4uM99JKtM9VRkJtsSRydnZerVshw9E6NwrJj7zP53qFTtutCpF5Ewq71/tZhLy93HrV5tenTj7Ah6lQS9dZmEmveGme6GeDwBo+c4ksC7EFXF3WgOqtg2Qc9ytfr0QmK9B5N7z9HE2XmfBvdKlcCopiT1XYy/PJg8nUgmkcfNfXxkWhnTJKZfMS2j+JyAY4b9Rjm4lKC7aonCHf2tqpLHmO8zlEF0h5mztEPY52GGbTpkr8+rVJehE356yuV7geaRH4robOrwV0M5edKQ5+210WFYXvnQNLG9G7VU0j6NcncyNzYnSAqsCwALlkF8qccdDUVcp57lyGjOT0GZGH2GRGKL4vcFchSflvsDuiIJKNQja7apoXFmNBkthhM3Zikbs799pOp/l19qK8NjdqPNgJfCmOegMyfHvx8Npv+mW23x5Jp+ejbb17v0dcuJJxWmzM6Dt+StuuA/kXCkkh41Uv0ZpZr966vjwjFxedyApXlLjHjztuufMdaass8iXymgnKOVgHHNSoTfR3rx8IkJ5dqIhiiX+/8cggZGeCptm9J9Bdu3t+SA="
+  matrix:
+    - WP_VERSION=latest WP_MULTISITE=0
+    - WP_VERSION=5.0 WP_MULTISITE=0
+matrix:
+  includes:
+    - php: 7.0
+      env: WP_VERSION=latest WP_MULTISITE=0 WP_PLUGIN_DEPLOY=1
 before_script:
 - export PATH="$HOME/.composer/vendor/bin:$PATH"
 - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
@@ -27,6 +36,7 @@ after_success:
 - curl -L https://raw.githubusercontent.com/fumikito/wp-readme/master/wp-readme.php | php
 - sed -i -e "s/nightly/${TRAVIS_TAG}/" $(basename $TRAVIS_REPO_SLUG).php
 - curl https://raw.githubusercontent.com/miya0001/auto-build/master/auto-build.sh | bash
+- curl -L https://raw.githubusercontent.com/miya0001/travis2wpplugin/master/deploy.sh | bash
 deploy:
   provider: releases
   skip_cleanup: true

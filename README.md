@@ -2,11 +2,11 @@
 
 <!-- only:wp>
 Contributors: kuno1, Takahashi_Fumiki  
-Tags: search, elasticsearch  
+Tags: php, error, recovery
 Requires at least: 5.0  
 Requires PHP: 7.0  
 Tested up to: 5.1.1  
-Stable tag: 0.7.1  
+Stable tag: 0.8.0  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 <only:wp -->
@@ -63,7 +63,7 @@ We use Hagakure with our [hosting service](https://hosting.kunoichiwp.com/), ple
 
 ### How can I contribute?
 
-We host this plugin on GitHub. Please feel free to send [PRs](https://github.com/kuno1/hagakure/pulls) or to make [issues](https://github.com/kuno1/hagakure/issues).
+We host this plugin on GitHub [kuno1/hagakure](https://github.com/kuno1/hagakure). Please feel free to send [PRs](https://github.com/kuno1/hagakure/pulls) or to make [issues](https://github.com/kuno1/hagakure/issues).
 
 ## Screenshots
 
@@ -71,8 +71,6 @@ W.I.P
 
 ## Changelog
 
-### 0.7.0
+### 0.8.0
 
 * first Release.
-
-
