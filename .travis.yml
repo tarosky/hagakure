@@ -37,6 +37,7 @@ after_success:
 - sed -i -e "s/nightly/${TRAVIS_TAG}/" $(basename $TRAVIS_REPO_SLUG).php
 - curl https://raw.githubusercontent.com/miya0001/auto-build/master/auto-build.sh | bash
 - curl -L https://raw.githubusercontent.com/miya0001/travis2wpplugin/master/deploy.sh | bash
+- rm -rf ./build
 deploy:
   provider: releases
   skip_cleanup: true
