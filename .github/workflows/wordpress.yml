@@ -78,9 +78,8 @@ jobs:
         with:
           generate-zip: true
         env:
-          SVN_USERNAME: ${{ secrets.WPORG_SVN_USERNAME }}
-          SVN_PASSWORD: ${{ secrets.WPORG_SVN_PASS }}
-          SLUG: hagakure
+          SVN_USERNAME: ${{ secrets.WPORG_FUMIKI_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.WPORG_FUMIKI_PASSWORD }}
 
       - name: Create Release
         id: create_release
