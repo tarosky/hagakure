@@ -2,6 +2,13 @@
 
 set -ex
 
+# Set variables.
+PREFIX="refs/tags/"
+VERSION=${1#"$PREFIX"}
+
+echo "Building Plugin v${VERSION}..."
+
+
 composer install --no-dev --prefer-dist
 
 # Create readme.txt
