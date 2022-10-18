@@ -18,13 +18,27 @@ class Command extends \WP_CLI_Command {
 	 * <message>
 	 * : Error message.
 	 *
-	 * @synopsis <message>
+	 * <type>
+	 * : Error type. notice, warning, error.
+	 *
+	 * @synopsis <message> <type>
 	 * @param array $args
 	 *
 	 */
 	public function error( $args ) {
-		list( $message ) = $args;
-		trigger_error( $message, E_USER_ERROR );
+		list( $message, $type ) = $args;
+		switch ( $type ) {
+			case 'warning':
+				$error_lv = E_USER_WARNING;
+				break;
+			case 'notice':
+				$error_lv = E_USER_NOTICE;
+				break;
+			default:
+				$error_lv = E_USER_ERROR;
+				break;
+		}
+		trigger_error( $message, $error_lv );
 	}
 
 	/**
@@ -49,7 +63,6 @@ class Command extends \WP_CLI_Command {
 		\WP_CLI::line( sprintf( 'Start exhausting memory limit: %s', $limit ) );
 		\WP_CLI::line( '=================' );
 		\WP_CLI::line( '' );
-		ob_flush();
 		// Retries post randomly and store it to array.
 		$posts = [];
 		while ( true ) {
@@ -59,7 +72,6 @@ class Command extends \WP_CLI_Command {
 				'posts_per_page' => 100,
 			] ) );
 			echo '.';
-			ob_flush();
 		}
 
 	}

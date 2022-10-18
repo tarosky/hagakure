@@ -5,9 +5,10 @@
  * @package hagakure
  */
 
-class Date_Display_Test extends WP_UnitTestCase {
-	
+class Display_Test extends WP_UnitTestCase {
+
     public function test_get_the_date() {
-        $this->assertTrue( true );
+		$handler = \Kunoichi\Hagakure\ErrorHandler::get_instance();
+        $this->assertTrue( is_int( $handler->error_levels() ) );
     }
 }

@@ -2,7 +2,7 @@
 
 Contributors: kuno1, Takahashi_Fumiki  
 Tags: php, error, recovery  
-Requires at least: 5.0  
+Requires at least: 5.8  
 Requires PHP: 7.0  
 Tested up to: 6.0  
 Stable Tag: nightly  
@@ -52,6 +52,12 @@ We recommend to watch logs with notification services like [CloudWatch Logs](htt
 This error occurs on the productional environment and you may not have chanses to see it occurs.
 We use Hagakure with our [hosting service](https://hosting.kunoichiwp.com/), please looking forward to see [our blog published](https://kunoichiwp.com/blog) and describing about the integration!
 
+This plugin also adds debug backtrace to error logs. To modify error level to detailed backtrace, define constant:
+
+```
+define( 'HAGAKURE_ERROR_LEVEL', E_NOTICE | E_USER_WARNING | E_WARNING | E_USER_ERROR; );
+```
+
 ## Installation
 
 1. Upload `hagakure` folder to the `/wp-content/plugins` directory.
@@ -69,6 +75,10 @@ We host this plugin on GitHub [kuno1/hagakure](https://github.com/kuno1/hagakure
 W.I.P
 
 ## Changelog
+
+### 1.0.0
+
+* Add warning and notice detail handler.
 
 ### 0.8.0
 

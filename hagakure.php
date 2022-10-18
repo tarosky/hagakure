@@ -16,6 +16,8 @@ require __DIR__ . '/vendor/autoload.php';
 
 // Register DB loggers.
 \Kunoichi\Hagakure\DbLogger::get_instance();
+// Set error handler.
+\Kunoichi\Hagakure\ErrorHandler::get_instance();
 
 // Register utility commands if under CLI
 if ( defined( 'WP_CLI' ) && WP_CLI ) {

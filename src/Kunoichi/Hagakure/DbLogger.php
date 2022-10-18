@@ -30,7 +30,7 @@ class DbLogger extends Singleton {
 	 * @return string
 	 */
 	public function filter_query( $query ) {
-		$this->last_backtrace = debug_backtrace( false );
+		$this->last_backtrace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS );
 		return $query;
 	}
 

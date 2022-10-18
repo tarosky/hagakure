@@ -6,7 +6,8 @@
 		"update": "wp-env start --update",
 		"stop": "wp-env stop",
 		"cli": "wp-env run cli wp",
-		"cli:test": "wp-env run tests-cli wp"
+		"cli:test": "wp-env run tests-cli wp",
+		"env": "wp-env"
 	},
 	"author": "Kunoichi INC.",
 	"license": "LGPL-3.0-or-later",
