@@ -2,7 +2,7 @@
 
 set -ex
 
-composer install --no-dev -=prefer-dist
+composer install --no-dev --prefer-dist
 
 # Create readme.txt
 curl -L https://raw.githubusercontent.com/fumikito/wp-readme/master/wp-readme.php | php
