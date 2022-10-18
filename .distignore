@@ -2,10 +2,12 @@
 .distignore
 .editorconfig
 .git
+.github
 .gitignore
 .gitlab-ci.yml
 .travis.yml
 .DS_Store
+.wp-env.json
 Thumbs.db
 behat.yml
 bin
@@ -15,6 +17,7 @@ composer.lock
 Gruntfile.js
 package.json
 package-lock.json
+phpcs.ruleset.xml
 phpunit.xml
 phpunit.xml.dist
 multisite.xml
@@ -29,3 +32,5 @@ node_modules
 *.sql
 *.tar.gz
 *.zip
+hagakure.php.bak
+readme.txt.bak

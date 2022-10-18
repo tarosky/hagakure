@@ -11,9 +11,9 @@ use Kunoichi\Hagakure\Pattern\Singleton;
  * @package hagakure
  */
 class DbLogger extends Singleton {
-	
+
 	private $last_backtrace = [];
-	
+
 	/**
 	 * Constructor
 	 */
@@ -21,7 +21,7 @@ class DbLogger extends Singleton {
 		add_filter( 'query', [ $this, 'filter_query' ] );
 		register_shutdown_function( [ $this, 'on_shut_down' ] );
 	}
-	
+
 	/**
 	 * Register backtrace before send query.
 	 *
@@ -33,24 +33,24 @@ class DbLogger extends Singleton {
 		$this->last_backtrace = debug_backtrace( false );
 		return $query;
 	}
-	
+
 	/**
 	 * Shutdown handler.
 	 */
 	public function on_shut_down() {
 		$error = error_get_last();
-		if ( $error === null ) {
+		if ( null === $error ) {
 			return;
 		}
-		if ( ! in_array( $error['type'], [ E_ERROR, E_CORE_ERROR ] ) ) {
+		if ( ! in_array( $error['type'], [ E_ERROR, E_CORE_ERROR ], true ) ) {
 			return;
 		}
-		if ( isset( $error['file'] ) && in_array( basename( $error['file'] ), [ 'wp-db.php', 'db.php' ] ) ) {
+		if ( isset( $error['file'] ) && in_array( basename( $error['file'] ), [ 'wp-db.php', 'db.php' ], true ) ) {
 			// Maybe this is db error.
 			error_log( "wpdb Error Backtrace:\n" . implode( "\n", array_map( [ $this, 'filter_row' ], $this->last_backtrace ) ) );
 		}
 	}
-	
+
 	/**
 	 * Format backtrace lines.
 	 *

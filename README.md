@@ -1,20 +1,19 @@
 # Hagakure - Yet Another Error Reporter
 
-<!-- only:wp>
 Contributors: kuno1, Takahashi_Fumiki  
-Tags: php, error, recovery
+Tags: php, error, recovery  
 Requires at least: 5.0  
 Requires PHP: 7.0  
-Tested up to: 5.1.1  
-Stable tag: 0.8.0  
+Tested up to: 6.0  
+Stable Tag: nightly  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
-<only:wp -->
+
 
 A WordPress plugin to clarify meaningless errors like "Allowed memory size of xxxxxxxx bytes exhausted".
 
 <!-- only:github/ -->
-![Travis CI](https://travis-ci.org/kuno1/hagakure.svg?branch=master)
+![example workflow](https://github.com/kuno1/hagakure/actions/workflows/wordpress.yml/badge.svg)
 <!-- /only:github -->
 
 ## Description

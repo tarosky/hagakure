@@ -9,23 +9,23 @@ namespace Kunoichi\Hagakure\Pattern;
  * @package hagakure
  */
 abstract class Singleton {
-	
+
 	/**
 	 * @var static[]
 	 */
 	private static $instances = [];
-	
+
 	/**
 	 * Constructor
 	 */
 	final private function __construct() {
 		$this->init();
 	}
-	
+
 	protected function init() {
 		// Do something.
 	}
-	
+
 	/**
 	 * Get instance.
 	 *

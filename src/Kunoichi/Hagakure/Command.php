@@ -9,7 +9,7 @@ namespace Kunoichi\Hagakure;
  * @package Hagakure
  */
 class Command extends \WP_CLI_Command {
-	
+
 	/**
 	 * Trigger error to watch log. For debug only.
 	 *
@@ -26,7 +26,7 @@ class Command extends \WP_CLI_Command {
 		list( $message ) = $args;
 		trigger_error( $message, E_USER_ERROR );
 	}
-	
+
 	/**
 	 * Overflow memory for Debug.
 	 *
@@ -42,9 +42,9 @@ class Command extends \WP_CLI_Command {
 	 * @throws \Exception
 	 */
 	public function overflow( $args, $assoc ) {
-		$limit = $assoc[ 'memory' ] ?? '16M';
+		$limit = $assoc['memory'] ?? '16M';
 		if ( false === ini_set( 'memory_limit', $limit ) ) {
-			\WP_CLI::error( sprintf( __( 'Failed to set memory: %s', 'hagakure' ), $limit ) );
+			\WP_CLI::error( sprintf( 'Failed to set memory: %s', $limit ) );
 		}
 		\WP_CLI::line( sprintf( 'Start exhausting memory limit: %s', $limit ) );
 		\WP_CLI::line( '=================' );
@@ -61,6 +61,6 @@ class Command extends \WP_CLI_Command {
 			echo '.';
 			ob_flush();
 		}
-		
+
 	}
 }

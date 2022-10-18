@@ -1,0 +1,16 @@
+{
+	"name": "hagakure",
+	"main": "gulpfile.js",
+	"scripts": {
+		"start": "wp-env start",
+		"update": "wp-env start --update",
+		"stop": "wp-env stop",
+		"cli": "wp-env run cli wp",
+		"cli:test": "wp-env run tests-cli wp"
+	},
+	"author": "Kunoichi INC.",
+	"license": "LGPL-3.0-or-later",
+	"devDependencies": {
+		"@wordpress/env": "^5.4.0"
+	}
+}
