@@ -80,6 +80,7 @@ jobs:
         env:
           SVN_USERNAME: ${{ secrets.WPORG_SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.WPORG_SVN_PASS }}
+          SLUG: hagakure
 
       - name: Create Release
         id: create_release
