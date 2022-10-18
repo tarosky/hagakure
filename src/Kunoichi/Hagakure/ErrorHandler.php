@@ -44,7 +44,7 @@ class ErrorHandler extends Singleton {
 				break;
 			case E_USER_ERROR:
 				$prefix .= 'Fatal error: ';
-				$return = false;
+				$return  = false;
 				break;
 			default:
 				$prefix .= 'Error: ';
@@ -77,7 +77,7 @@ class ErrorHandler extends Singleton {
 				}
 			}
 			$function = implode( '', $functions );
-			$lines[] = sprintf( "%s\t%s", $function, $file );
+			$lines[]  = sprintf( "%s\t%s", $function, $file );
 		}
 		return implode( "\n", $lines );
 	}
