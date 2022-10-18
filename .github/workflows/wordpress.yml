@@ -30,10 +30,11 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Setup PHP
-        uses: nanasess/setup-php@master
+      - name: Setup PHP with composer v2
+        uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          tools: composer:v2.2
 
       - name: Validate composer.json and composer.lock
         run: composer validate
