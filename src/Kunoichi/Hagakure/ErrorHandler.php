@@ -79,6 +79,8 @@ class ErrorHandler extends Singleton {
 			$function = implode( '', $functions );
 			$lines[]  = sprintf( "%s\t%s", $function, $file );
 		}
+		// If possible, add URI.
+		$lines[] = sprintf( 'URI: %s', $_SERVER['REQUEST_URI'] ?? 'UNDEFINED' );
 		return implode( "\n", $lines );
 	}
 

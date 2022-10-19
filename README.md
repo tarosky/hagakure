@@ -76,6 +76,10 @@ W.I.P
 
 ## Changelog
 
+### 1.1.0
+
+* Add Request URI to backtrace.
+
 ### 1.0.0
 
 * Add warning and notice detail handler.
