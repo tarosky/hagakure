@@ -55,7 +55,7 @@ We use Hagakure with our [hosting service](https://hosting.kunoichiwp.com/), ple
 This plugin also adds debug backtrace to error logs. To modify error level to detailed backtrace, define constant:
 
 ```
-define( 'HAGAKURE_ERROR_LEVEL', E_NOTICE | E_USER_WARNING | E_WARNING | E_USER_ERROR; );
+define( 'HAGAKURE_ERROR_LEVEL', E_NOTICE | E_USER_WARNING | E_WARNING | E_USER_ERROR );
 ```
 
 ## Installation
