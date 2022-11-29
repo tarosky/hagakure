@@ -18,6 +18,8 @@ require __DIR__ . '/vendor/autoload.php';
 \Kunoichi\Hagakure\DbLogger::get_instance();
 // Set error handler.
 \Kunoichi\Hagakure\ErrorHandler::get_instance();
+// Register Slow Query logger.
+\Kunoichi\Hagakure\SlowQuery::get_instance();
 
 // Register utility commands if under CLI
 if ( defined( 'WP_CLI' ) && WP_CLI ) {

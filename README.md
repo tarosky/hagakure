@@ -4,7 +4,7 @@ Contributors: kuno1, Takahashi_Fumiki
 Tags: php, error, recovery  
 Requires at least: 5.8  
 Requires PHP: 7.0  
-Tested up to: 6.0  
+Tested up to: 6.1  
 Stable Tag: nightly  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -18,11 +18,11 @@ A WordPress plugin to clarify meaningless errors like "Allowed memory size of xx
 
 ## Description
 
-Have you ever seen an error log like below?
+Have you ever seen an error log like the one below?
 
 > PHP Fatal error: Allowed memory size of xxxxxx bytes exhausted (tried to allocate xxx bytes) in /var/www/wordpress/wp-includes/wp-db.php on line 2007
 
-This means that [PHP memory limit](https://www.php.net/manual/en/ini.core.php#ini.memory-limit) is exhausted while retrieving data from database. In many case, this happens when your site has big data and making insane loops inside.
+This means that [PHP memory limit](https://www.php.net/manual/en/ini.core.php#ini.memory-limit) is exhausted while retrieving data from a database. In any case, this happens when your site has big data and makes insane loops inside.
 
 But we want to know that **which plugin tried to retrieve data?**
 
@@ -46,17 +46,23 @@ Hagakure adds extra information to error.log file when `wp-db.php` causes memory
 #14     require /app/public/index.php   Line 17
 ```
 
-This log will always follow memoly limit Fatal Error by `wp-db.php`. Now you can find `#8` calls `get_posts` repeatedly.
+This log will always follow the memory limit Fatal Error by `wp-db.php`. Now you can find `#8` calls `get_posts` repeatedly.
 
-We recommend to watch logs with notification services like [CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html).
-This error occurs on the productional environment and you may not have chanses to see it occurs.
-We use Hagakure with our [hosting service](https://hosting.kunoichiwp.com/), please looking forward to see [our blog published](https://kunoichiwp.com/blog) and describing about the integration!
+We recommend watching logs with notification services like [CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html).
+This error occurs in the productional environment, and you may not have a chance to see it occurs.
+We use Hagakure with our [hosting service](https://hosting.kunoichiwp.com/), please look forward to seeing [our blog published](https://kunoichiwp.com/blog) and describing the integration!
 
-This plugin also adds debug backtrace to error logs. To modify error level to detailed backtrace, define constant:
+This plugin also adds debug backtrace to error logs. To modify the error level to a detailed backtrace, define the constant:
 
 ```
 define( 'HAGAKURE_ERROR_LEVEL', E_NOTICE | E_USER_WARNING | E_WARNING | E_USER_ERROR; );
 ```
+
+Besides that, if `SAVEQUERIES` is set `true`, the slow query log will be logged with PHP debug backtrace. This helps you to debug.
+
+## Acknowledgements
+
+The base text for dummy content is "Three Ghost Story" by Charles Dickens. The text file is modified the one of [Project Gutenberg](https://www.gutenberg.org/ebooks/1289).
 
 ## Installation
 
@@ -76,6 +82,10 @@ W.I.P
 
 ## Changelog
 
+### 1.2.0
+
+* Slow query can be logged with the backtraces.
+
 ### 1.1.0
 
 * Add Request URI to backtrace.
@@ -86,4 +96,4 @@ W.I.P
 
 ### 0.8.0
 
-* first Release.
+* First Release.

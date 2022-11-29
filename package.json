@@ -7,6 +7,7 @@
 		"stop": "wp-env stop",
 		"cli": "wp-env run cli wp",
 		"cli:test": "wp-env run tests-cli wp",
+		"log": "wp-env logs all --watch",
 		"env": "wp-env"
 	},
 	"author": "Kunoichi INC.",
