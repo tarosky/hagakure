@@ -55,7 +55,7 @@ We use Hagakure with our [hosting service](https://hosting.kunoichiwp.com/), ple
 This plugin also adds debug backtrace to error logs. To modify the error level to a detailed backtrace, define the constant:
 
 ```
-define( 'HAGAKURE_ERROR_LEVEL', E_NOTICE | E_USER_WARNING | E_WARNING | E_USER_ERROR; );
+define( 'HAGAKURE_ERROR_LEVEL', E_NOTICE | E_USER_WARNING | E_WARNING | E_USER_ERROR );
 ```
 
 Besides that, if `SAVEQUERIES` is set `true`, the slow query log will be logged with PHP debug backtrace. This helps you to debug.
