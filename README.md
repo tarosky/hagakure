@@ -1,10 +1,10 @@
 # Hagakure - Yet Another Error Reporter
 
-Contributors: kuno1, Takahashi_Fumiki  
+Contributors: tarosky, Takahashi_Fumiki, kuno1  
 Tags: php, error, recovery  
-Requires at least: 5.8  
-Requires PHP: 7.0  
-Tested up to: 6.1  
+Requires at least: 5.9  
+Requires PHP: 7.4  
+Tested up to: 6.6  
 Stable Tag: nightly  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -13,7 +13,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 A WordPress plugin to clarify meaningless errors like "Allowed memory size of xxxxxxxx bytes exhausted".
 
 <!-- only:github/ -->
-![example workflow](https://github.com/kuno1/hagakure/actions/workflows/wordpress.yml/badge.svg)
+![Master Workflow](https://github.com/tarosky/hagakure/actions/workflows/wordpress.yml/badge.svg)
 <!-- /only:github -->
 
 ## Description
@@ -44,6 +44,7 @@ Hagakure adds extra information to error.log file when `wp-db.php` causes memory
 #12     do_action       /app/public/wp-includes/template-loader.php     Line 13
 #13     require_once    /app/public/wp-blog-header.php  Line 19
 #14     require /app/public/index.php   Line 17
+#15     URI: /?p=1
 ```
 
 This log will always follow the memory limit Fatal Error by `wp-db.php`. Now you can find `#8` calls `get_posts` repeatedly.
@@ -52,7 +53,7 @@ We recommend watching logs with notification services like [CloudWatch Logs](htt
 This error occurs in the productional environment, and you may not have a chance to see it occurs.
 We use Hagakure with our [hosting service](https://hosting.kunoichiwp.com/), please look forward to seeing [our blog published](https://kunoichiwp.com/blog) and describing the integration!
 
-This plugin also adds debug backtrace to error logs. To modify the error level to a detailed backtrace, define the constant:
+This plugin also adds debug backtrace to error logs. To modify the error level to a detailed backtrace, define the constant in <code>wp-config.php</code> or somewhere else:
 
 ```
 define( 'HAGAKURE_ERROR_LEVEL', E_NOTICE | E_USER_WARNING | E_WARNING | E_USER_ERROR );
@@ -74,13 +75,19 @@ The base text for dummy content is "Three Ghost Story" by Charles Dickens. The t
 
 ### How can I contribute?
 
-We host this plugin on GitHub [kuno1/hagakure](https://github.com/kuno1/hagakure). Please feel free to send [PRs](https://github.com/kuno1/hagakure/pulls) or to make [issues](https://github.com/kuno1/hagakure/issues).
+We host this plugin on GitHub [tarosky/hagakure](https://github.com/tarosky/hagakure). Please feel free to send [PRs](https://github.com/tarosky/hagakure/pulls) or to make [issues](https://github.com/tarosky/hagakure/issues).
 
 ## Screenshots
 
 W.I.P
 
 ## Changelog
+
+### 1.3.1
+
+* Bump required PHP and WP version.
+* Fix memory limit error log logic.
+* Move the ownership to TAROSKY Inc from Kunoichi Inc. Tarosky is a parent company of Kunoichi Inc.  Developers are the same ☺️
 
 ### 1.2.0
 
