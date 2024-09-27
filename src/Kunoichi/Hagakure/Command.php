@@ -78,6 +78,7 @@ class Command extends \WP_CLI_Command {
 	/**
 	 * Insert dummy contents.
 	 *
+	 * @subcommand insert-dummy
 	 * @synopsis <amount> [--title_length=<title_length>]
 	 * @param array $args
 	 * @param array $assoc
@@ -92,7 +93,7 @@ class Command extends \WP_CLI_Command {
 			\WP_CLI::error( sprintf( 'File not found at %s', $src ) );
 		}
 		$lines       = array_values( array_filter( explode( "\n\n", file_get_contents( $src ) ) ) );
-		$titles      = array_values( array_filter( $lines, function( $line ) use ( $title_length ) {
+		$titles      = array_values( array_filter( $lines, function ( $line ) use ( $title_length ) {
 			return strlen( $line ) < $title_length;
 		} ) );
 		$line_count  = count( $lines );
@@ -116,7 +117,7 @@ class Command extends \WP_CLI_Command {
 			$result    = wp_insert_post( $post_args );
 			echo $result ? '.' : 'x';
 			if ( $result ) {
-				$inserted++;
+				++$inserted;
 			}
 			// Clear savequreries cache.
 			$wpdb->queries = [];
