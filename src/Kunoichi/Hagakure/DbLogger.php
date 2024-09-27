@@ -60,7 +60,7 @@ class DbLogger extends Singleton {
 	 */
 	public function filter_row( $row ) {
 		static $line_no = 0;
-		$line_no++;
+		++$line_no;
 		if ( isset( $row['class'] ) ) {
 			return sprintf( '#%5$d	%3$s->%4$s()	%1$s	Line %2$s', $row['file'] ?? ' ', $row['line'] ?? 'N/A', $row['class'], $row['function'], $line_no );
 		} else {

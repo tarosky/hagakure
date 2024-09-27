@@ -8,11 +8,15 @@
 		"cli": "wp-env run cli wp",
 		"cli:test": "wp-env run tests-cli wp",
 		"log": "wp-env logs all --watch",
-		"env": "wp-env"
+		"env": "wp-env",
+		"test": "RESULT=${PWD##*/} && wp-env run tests-cli ./wp-content/plugins/$RESULT/vendor/bin/phpunit -c ./wp-content/plugins/$RESULT/phpunit.xml.dist"
 	},
 	"author": "Kunoichi INC.",
 	"license": "LGPL-3.0-or-later",
 	"devDependencies": {
-		"@wordpress/env": "^5.4.0"
+		"@wordpress/env": "^10.0.0"
+	},
+	"volta": {
+		"node": "18.20.4"
 	}
 }

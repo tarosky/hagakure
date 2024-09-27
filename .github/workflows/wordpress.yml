@@ -2,8 +2,6 @@ name: Deploy Plugin
 
 on:
   push:
-    branches:
-      - master
     tags:
       - '*'
   pull_request:
@@ -12,62 +10,48 @@ on:
 
 jobs:
   test:
-    runs-on: ${{ matrix.operating-system }}
+    name: PHP Unit Test
     strategy:
       matrix:
-        operating-system: [ ubuntu-18.04 ]  # OS. ubuntu-18.04 is also available.
-        php: [ '7.0', '7.4' ] # PHP versions to check.
-        wp: [ 'latest', '5.8' ]      # WordPress version to check.
-    services:
-      mysql:
-        image: mysql:5.7
-        options: --health-cmd "mysqladmin ping --host 127.0.0.1 --port 3306" --health-interval 20s --health-timeout 10s --health-retries 10
-        ports:
-          - 3306/tcp
-        env:
-          MYSQL_ROOT_PASSWORD: root
-    name: WordPress ${{ matrix.wp }} in PHP ${{ matrix.php }} UnitTest
+        php: [ '7.4', '8.1' ] # PHP versions to check.
+        wp: [ 'latest', '5.9' ]      # WordPress version to check.
+    uses: tarosky/workflows/.github/workflows/wp-unit-test.yml@main
+    with:
+      php_version: ${{ matrix.php }}
+      wp_version: ${{ matrix.wp }}
+
+  lint:
+    name: PHP Syntax Check
+    uses: tarosky/workflows/.github/workflows/phpcs.yml@main
+    with:
+      version: 7.4
+
+  status-check:
+    name: Confirm All test passed
+    needs: [ test, lint ]
+    runs-on: ubuntu-latest
+    if: always()
     steps:
-      - uses: actions/checkout@master
-
-      - name: Setup PHP with composer v2
-        uses: shivammathur/setup-php@v2
+      - uses: re-actors/alls-green@release/v1
         with:
-          php-version: ${{ matrix.php }}
-          tools: composer:v2.2
-
-      - name: Validate composer.json and composer.lock
-        run: composer validate
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
-
-      - name: Start MySQL
-        run: sudo systemctl start mysql
-
-      - name: Install WordPress
-        run: bash bin/install-wp-tests.sh wordpress root root 127.0.0.1:3306 ${{ matrix.wp }}
-
-      - name: Run Unit Test
-        run: composer test
-
-      - name: Check PHP syntax
-        run: composer lint
+          jobs: ${{ toJSON(needs) }}
 
   release:
     name: Deploy WordPress.org
-    needs: [ test ]
+    needs: [ status-check ]
     if: contains(github.ref, 'tags/')
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@main
 
-      - name: Setup PHP with composer v2
+      - name: Setup PHP with composer
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.0
-          tools: composer:v2.2
+          php-version: 7.4
+          tools: composer
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Plugin
         run: bash bin/build.sh ${{ github.ref }}
@@ -78,8 +62,8 @@ jobs:
         with:
           generate-zip: true
         env:
-          SVN_USERNAME: ${{ secrets.WPORG_FUMIKI_USERNAME }}
-          SVN_PASSWORD: ${{ secrets.WPORG_FUMIKI_PASSWORD }}
+          SVN_USERNAME: ${{ secrets.WP_ORG_USERNAME_TAROSKY }}
+          SVN_PASSWORD: ${{ secrets.WP_ORG_PASSWORD_TAROSKY }}
 
       - name: Create Release
         id: create_release
