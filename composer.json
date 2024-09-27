@@ -33,6 +33,11 @@
             "Kunoichi\\Hagakure": "src"
         }
     },
+	"autoload-dev": {
+		"psr-4": {
+			"Kunoichi\\Hagakure\\Tests\\": "tests\\src"
+		}
+	},
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true

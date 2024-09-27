@@ -4,6 +4,7 @@ namespace Kunoichi\Hagakure;
 
 
 use Kunoichi\Hagakure\Pattern\Singleton;
+use Kunoichi\Hagakure\Utility\EnvInfo;
 
 /**
  * Extra error handler.
@@ -11,6 +12,8 @@ use Kunoichi\Hagakure\Pattern\Singleton;
  * @package
  */
 class ErrorHandler extends Singleton {
+
+	use EnvInfo;
 
 	/**
 	 * {@inheritdoc}
@@ -80,7 +83,7 @@ class ErrorHandler extends Singleton {
 			$lines[]  = sprintf( "%s\t%s", $function, $file );
 		}
 		// If possible, add URI.
-		$lines[] = sprintf( 'URI: %s', $_SERVER['REQUEST_URI'] ?? 'UNDEFINED' );
+		$lines[] = sprintf( 'URI: %s', $this->uri_info() );
 		return implode( "\n", $lines );
 	}
 

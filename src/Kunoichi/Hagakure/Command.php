@@ -78,6 +78,7 @@ class Command extends \WP_CLI_Command {
 	/**
 	 * Insert dummy contents.
 	 *
+	 * @subcommand insert-dummy
 	 * @synopsis <amount> [--title_length=<title_length>]
 	 * @param array $args
 	 * @param array $assoc

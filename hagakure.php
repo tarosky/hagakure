@@ -25,3 +25,8 @@ require __DIR__ . '/vendor/autoload.php';
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	WP_CLI::add_command( 'hagakure', Kunoichi\Hagakure\Command::class );
 }
+
+// Register shortcodes for test environment.
+if ( class_exists( 'Kunoichi\Hagakure\Tests\OverflowShortCode' ) ) {
+	\Kunoichi\Hagakure\Tests\OverflowShortCode::get_instance();
+}

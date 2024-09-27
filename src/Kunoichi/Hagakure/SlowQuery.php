@@ -4,11 +4,14 @@ namespace Kunoichi\Hagakure;
 
 
 use Kunoichi\Hagakure\Pattern\Singleton;
+use Kunoichi\Hagakure\Utility\EnvInfo;
 
 /**
  * Record slow query for log from PHP.
  */
 class SlowQuery extends Singleton {
+
+	use EnvInfo;
 
 	/**
 	 * @var array Query list.
@@ -41,7 +44,7 @@ class SlowQuery extends Singleton {
 			error_log( sprintf(
 				"[Hagakure Slow Log]\t%f seconds\t@%s\n%s\n%s",
 				$query_time,
-				( $_SERVER['REQUEST_URI'] ?? 'UNKNOWN' ),
+				$this->uri_info(),
 				$query,
 				$query_callstack
 			) );

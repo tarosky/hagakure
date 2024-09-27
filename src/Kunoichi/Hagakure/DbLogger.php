@@ -4,6 +4,7 @@ namespace Kunoichi\Hagakure;
 
 
 use Kunoichi\Hagakure\Pattern\Singleton;
+use Kunoichi\Hagakure\Utility\EnvInfo;
 
 /**
  * Log DB call stack.
@@ -11,6 +12,8 @@ use Kunoichi\Hagakure\Pattern\Singleton;
  * @package hagakure
  */
 class DbLogger extends Singleton {
+
+	use EnvInfo;
 
 	private $last_backtrace = [];
 
@@ -45,9 +48,11 @@ class DbLogger extends Singleton {
 		if ( ! in_array( $error['type'], [ E_ERROR, E_CORE_ERROR ], true ) ) {
 			return;
 		}
-		if ( isset( $error['file'] ) && in_array( basename( $error['file'] ), [ 'wp-db.php', 'db.php' ], true ) ) {
+		if ( isset( $error['message'], $error['file'] ) && ( str_contains( $error['message'], 'memory size' ) || in_array( basename( $error['file'] ), [ 'wp-db.php', 'db.php' ], true ) ) ) {
 			// Maybe this is db error.
-			error_log( "wpdb Error Backtrace:\n" . implode( "\n", array_map( [ $this, 'filter_row' ], $this->last_backtrace ) ) );
+			$rows    = array_map( [ $this, 'filter_row' ], $this->last_backtrace );
+			$rows [] = sprintf( 'URI: %s', $this->uri_info() );
+			error_log( "wpdb Error Backtrace:\n" . implode( "\n", $rows ) );
 		}
 	}
 
