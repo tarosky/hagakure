@@ -43,16 +43,22 @@ class DbLogger extends Singleton {
 	public function on_shut_down() {
 		$error = error_get_last();
 		if ( null === $error ) {
+			// No error.
 			return;
 		}
 		if ( ! in_array( $error['type'], [ E_ERROR, E_CORE_ERROR ], true ) ) {
 			return;
 		}
-		if ( isset( $error['message'], $error['file'] ) && ( str_contains( $error['message'], 'memory size' ) || in_array( basename( $error['file'] ), [ 'wp-db.php', 'db.php' ], true ) ) ) {
-			// Maybe this is db error.
-			$rows    = array_map( [ $this, 'filter_row' ], $this->last_backtrace );
-			$rows [] = sprintf( 'URI: %s', $this->uri_info() );
-			error_log( "wpdb Error Backtrace:\n" . implode( "\n", $rows ) );
+		if ( isset( $error['message'], $error['file'] ) ) {
+			if ( str_contains( $error['message'], 'memory size' ) || in_array( basename( $error['file'] ), [ 'wp-db.php', 'db.php' ], true ) ) {
+				// Maybe this is db error.
+				$rows    = array_map( [ $this, 'filter_row' ], $this->last_backtrace );
+				$rows [] = sprintf( 'URI: %s', $this->uri_info() );
+				error_log( "wpdb Error Backtrace:\n" . implode( "\n", $rows ) );
+			} else {
+				// This is normal Fatal Error.
+				error_log( sprintf( '[Error Request] URI: %s', $_SERVER['REQUEST_URI'] ?? 'UNKNOWN REQUEST' ) );
+			}
 		}
 	}
 
