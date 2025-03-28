@@ -1,9 +1,7 @@
 # Hagakure - Yet Another Error Reporter
 
 Contributors: tarosky, Takahashi_Fumiki, kuno1  
-Tags: php, error, recovery  
-Requires at least: 5.9  
-Requires PHP: 7.4  
+Tags: php, error, recovery
 Tested up to: 6.6  
 Stable Tag: nightly  
 License: GPLv3 or later  

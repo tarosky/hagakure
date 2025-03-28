@@ -5,6 +5,8 @@
  * Description: A WordPress plugin to clarify meaningless errors like "Allowed memory size of xxxxxxxx bytes exhausted".
  * Author: Tarosky
  * Author URI: https://tarosky.co.jp
+ * Requires at least: 5.9
+ * Requires PHP: 7.4
  * Text Domain: hagakure
  * Domain Path: /languages
  */
@@ -27,6 +29,6 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 }
 
 // Register shortcodes for test environment.
-if ( class_exists( 'Kunoichi\Hagakure\Tests\OverflowShortCode' ) ) {
-	\Kunoichi\Hagakure\Tests\OverflowShortCode::get_instance();
+if ( class_exists( 'Kunoichi\Hagakure\Tests\InappropriateShortCode' ) ) {
+	\Kunoichi\Hagakure\Tests\InappropriateShortCode::get_instance();
 }

@@ -19,6 +19,7 @@ class ErrorHandler extends Singleton {
 	 * {@inheritdoc}
 	 */
 	protected function init() {
+		// Register error handler.
 		set_error_handler( [ $this, 'hagakure_error_handler' ], $this->error_levels() );
 	}
 
