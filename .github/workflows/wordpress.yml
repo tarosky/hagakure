@@ -41,6 +41,9 @@ jobs:
     needs: [ status-check ]
     if: contains(github.ref, 'tags/')
     runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://wordpress.org/plugins/hagakure/
     steps:
       - name: Checkout code
         uses: actions/checkout@main
