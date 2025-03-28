@@ -8,13 +8,14 @@ use Kunoichi\Hagakure\Pattern\Singleton;
 /**
  * Register Overflow short code.
  */
-class OverflowShortCode extends Singleton {
+class InappropriateShortCode extends Singleton {
 
 	/**
 	 * {@inheritdoc}
 	 */
 	protected function init() {
 		add_shortcode( 'overflow', [ $this, 'overflow' ] );
+		add_shortcode( 'fatal_error', [ $this, 'fatal_error' ] );
 	}
 
 	/**
@@ -36,6 +37,21 @@ class OverflowShortCode extends Singleton {
 			] ) );
 			echo '.';
 		}
+		return '<div style="overflow: hidden;">' . $content . '</div>';
+	}
+
+	/**
+	 * Raise fatal error.
+	 *
+	 * @param array  $atts
+	 * @param string $content
+	 *
+	 * @return string
+	 */
+	public function fatal_error( $atts, $content = '' ) {
+		// Call undefined function.
+		// phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+		this_function_is_never_defined();
 		return '<div style="overflow: hidden;">' . $content . '</div>';
 	}
 }
