@@ -1,0 +1,49 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to static method add_command\(\) on an unknown class WP_CLI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: hagakure.php
+
+		-
+			message: '#^Found usage of constant DOING_CRON\. Use wp_doing_cron\(\) instead\.$#'
+			identifier: phpstanWP.wpConstant.fetch
+			count: 1
+			path: src/Kunoichi/Hagakure/DbLogger.php
+
+		-
+			message: '#^Function str_contains not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: src/Kunoichi/Hagakure/DbLogger.php
+
+		-
+			message: '#^Offset ''file'' on array\{type\: 1\|16, message\: string, file\: string, line\: int\} in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Kunoichi/Hagakure/DbLogger.php
+
+		-
+			message: '#^Offset ''message'' on array\{type\: 1\|16, message\: string, file\: string, line\: int\} in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Kunoichi/Hagakure/DbLogger.php
+
+		-
+			message: '#^Found usage of constant DOING_CRON\. Use wp_doing_cron\(\) instead\.$#'
+			identifier: phpstanWP.wpConstant.fetch
+			count: 1
+			path: src/Kunoichi/Hagakure/ErrorHandler.php
+
+		-
+			message: '#^Method Kunoichi\\Hagakure\\ErrorHandler\:\:hagakure_error_handler\(\) should return false but returns bool\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Kunoichi/Hagakure/ErrorHandler.php
+
+		-
+			message: '#^Found usage of constant DOING_CRON\. Use wp_doing_cron\(\) instead\.$#'
+			identifier: phpstanWP.wpConstant.fetch
+			count: 1
+			path: src/Kunoichi/Hagakure/SlowQuery.php
