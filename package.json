@@ -15,8 +15,5 @@
 	"license": "LGPL-3.0-or-later",
 	"devDependencies": {
 		"@wordpress/env": "^10.0.0"
-	},
-	"volta": {
-		"node": "18.20.4"
 	}
 }
