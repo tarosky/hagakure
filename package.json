@@ -2,6 +2,7 @@
 	"name": "hagakure",
 	"main": "gulpfile.js",
 	"scripts": {
+		"prepare": "husky",
 		"start": "wp-env start",
 		"update": "wp-env start --update",
 		"stop": "wp-env stop",
@@ -14,6 +15,11 @@
 	"author": "Kunoichi INC.",
 	"license": "LGPL-3.0-or-later",
 	"devDependencies": {
-		"@wordpress/env": "^10.0.0"
+		"@wordpress/env": "^10.0.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7"
+	},
+	"lint-staged": {
+		"*.php": "composer lint"
 	}
 }
