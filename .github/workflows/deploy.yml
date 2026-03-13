@@ -27,9 +27,6 @@ jobs:
       - name: Install Composer Dependencies
         run: composer install --no-dev --prefer-dist
 
-      - name: Build Assets
-        run: bash bin/build.sh ${{ github.event.release.tag_name }}
-
       - name: Generate readme.txt
         uses: tarosky/workflows/actions/wp-readme@main
 
