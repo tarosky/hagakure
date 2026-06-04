@@ -34,7 +34,7 @@ jobs:
     name: PHP UnitTest
     strategy:
       matrix:
-        php: [ '7.4', '8.0' ]
+        php: [ '7.4', '8.0', '8.2', '8.3' ]
         wp: [ 'latest', '6.6' ]
     uses: tarosky/workflows/.github/workflows/wp-unit-test.yml@main
     with:

@@ -1,6 +1,7 @@
 <?php
 /**
  * Plugin Name: Hagakure - Yet Another Error Reporter
+ * Plugin URI: https://github.com/tarosky/hagakure
  * Version: nightly
  * Description: A WordPress plugin to clarify meaningless errors like "Allowed memory size of xxxxxxxx bytes exhausted".
  * Author: Tarosky
