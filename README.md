@@ -1,8 +1,10 @@
 # Hagakure - Yet Another Error Reporter
 
 Contributors: tarosky, Takahashi_Fumiki, kuno1  
-Tags: php, error, recovery
-Tested up to: 6.6  
+Tags: error, debug, error-log, backtrace, slow-query  
+Requires at least: 5.9  
+Tested up to: 7.0  
+Requires PHP: 7.4  
 Stable Tag: nightly  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -11,7 +13,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 A WordPress plugin to clarify meaningless errors like "Allowed memory size of xxxxxxxx bytes exhausted".
 
 <!-- only:github/ -->
-![Master Workflow](https://github.com/tarosky/hagakure/actions/workflows/wordpress.yml/badge.svg)
+![Test Workflow](https://github.com/tarosky/hagakure/actions/workflows/test.yml/badge.svg)
 <!-- /only:github -->
 
 ## Description
@@ -65,11 +67,22 @@ The base text for dummy content is "Three Ghost Story" by Charles Dickens. The t
 
 ## Installation
 
+### Requirements
+
+* WordPress 5.9 or later.
+* PHP 7.4 or later. Tested and supported on PHP 7.4, 8.0, 8.2 and 8.3.
+
+### Steps
+
 1. Upload `hagakure` folder to the `/wp-content/plugins` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. That's it. This plugin will work as background.
 
 ## Frequently Asked Questions
+
+### Does this plugin support PHP 8.x?
+
+Yes. Hagakure requires PHP 7.4 or later and is tested against PHP 7.4, 8.0, 8.2 and 8.3 in CI.
 
 ### How can I contribute?
 
@@ -80,6 +93,14 @@ We host this plugin on GitHub [tarosky/hagakure](https://github.com/tarosky/haga
 W.I.P
 
 ## Changelog
+
+### 1.3.3
+
+* Respect the error suppression operator(@) and `error_reporting()` so that intentionally suppressed errors (e.g. `EINTR` from blocking socket functions) are no longer logged.
+
+### 1.3.2
+
+* Display only the request URI for non-DB errors in the error log.
 
 ### 1.3.1
 
