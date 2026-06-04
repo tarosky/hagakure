@@ -34,6 +34,12 @@ class ErrorHandler extends Singleton {
 	 * @return false
 	 */
 	public function hagakure_error_handler( $err_no, $err_str, $err_file = '', $err_line = 0 ) {
+		// Respect the error suppression operator(@) and error_reporting().
+		// PHP lowers error_reporting() while @ is active, so bail out and let
+		// the built-in handler (which also no-ops while suppressed) take over.
+		if ( ! ( error_reporting() & $err_no ) ) {
+			return false;
+		}
 		$stack  = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS );
 		$prefix = 'PHP ';
 		$return = true;
